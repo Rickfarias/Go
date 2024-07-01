@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	stringConexao := "root:Antonio_3506@/devbook?charset=utf8&parseTime=True&loc=Local"
+	stringConexao := "golang:golang_3506@@/devbook?charset=utf8&parseTime=True&loc=Local"
 	db, erro := sql.Open("mysql", stringConexao)
 	if erro != nil {
 		log.Fatal(erro)
@@ -21,4 +21,12 @@ func main() {
 	}
 
 	fmt.Println("Conexão está aberta!")
+
+	linhas, erro := db.Query("select * from usuarios")
+	if erro != nil {
+		log.Fatal(erro)
+	}
+	defer linhas.Close()
+
+	fmt.Println(linhas)
 }
